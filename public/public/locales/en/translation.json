@@ -7,5 +7,11 @@
 			"mostWatchedChannel": "Most watched channel",
 			"mostWatchedGame": "Most watched game"
 		}
+	},
+	"navbar": {
+		"items": {
+			"globalStats": "Global statistics",
+			"streamers": "Streamers"
+		}
 	}
 }
