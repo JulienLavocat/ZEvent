@@ -16,20 +16,26 @@ export default function Streamers() {
 			<ul>
 				{data.map((e) => (
 					<li
-						className="flex p-3 border-t last:border-b gap-4 first:border-t-0 border-gray-600"
+						className="p-3 border-t last:border-bfirst:border-t-0 border-gray-600"
 						key={e.twitch}>
-						<Avatar src={e.profileUrl} shape="circle" />
-						<div className="grow flex flex-col">
-							<h2
-								className={
-									e.online ? "text-success" : "text-error"
-								}>
-								{e.display}
-							</h2>
-							<p className="grow my-2 text-sm">{e.title}</p>
-							{e.online && <p>{e.game}</p>}
-						</div>
-						<p>{humanizeNumber(e.viewers)}</p>
+						<a
+							className="flex gap-4"
+							href={`https://twitch.tv/${e.twitch}`}
+							target="_blank"
+							rel="noopener noreferrer">
+							<Avatar src={e.profileUrl} shape="circle" />
+							<div className="grow flex flex-col">
+								<h2
+									className={
+										e.online ? "text-success" : "text-error"
+									}>
+									{e.display}
+								</h2>
+								<p className="grow my-2 text-sm">{e.title}</p>
+								{e.online && <p>{e.game}</p>}
+							</div>
+							<p>{humanizeNumber(e.viewers)}</p>
+						</a>
 					</li>
 				))}
 			</ul>
