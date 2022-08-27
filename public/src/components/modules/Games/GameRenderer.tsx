@@ -8,12 +8,12 @@ export default function GameRenderer({
 	gameId,
 }: NameViewersPair & { gameId: string }) {
 	return (
-		<div className="p-4">
+		<a className="p-4" href={"/games/" + gameId}>
 			<img
 				src={`https://static-cdn.jtvnw.net/ttv-boxart/${gameId}-285x380.jpg`}
 			/>
 			<h2>{name}</h2>
 			<p>{humanizeNumber(viewers)} viewers</p>
-		</div>
+		</a>
 	);
 }

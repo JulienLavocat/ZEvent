@@ -1,5 +1,6 @@
 import React from "react";
 import { RouteObject, useRoutes } from "react-router-dom";
+import Game from "./components/modules/Game/Game";
 import Games from "./components/modules/Games/Games";
 import GlobalStats from "./components/modules/GlobalStats/GlobalStats";
 import Streamers from "./components/modules/Streamers/Streamers";
@@ -22,6 +23,11 @@ const routes: RouteObject[] = [
 			{
 				path: "/games",
 				element: <Games />,
+				index: true,
+			},
+			{
+				path: "/games/:id",
+				element: <Game />,
 			},
 		],
 	},
