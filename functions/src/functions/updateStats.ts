@@ -8,6 +8,7 @@ import {
 	StreamInfos,
 } from "../utils/structures";
 import { createTwitchClient } from "../utils/twitch";
+import * as database from "firebase-admin/database";
 
 interface StatsData {
 	stats: Stats;
@@ -42,6 +43,7 @@ export default async function updateStats(response: Response) {
 		games,
 	};
 
+	await database.getDatabase().ref().set(data);
 	response.json(data);
 }
 

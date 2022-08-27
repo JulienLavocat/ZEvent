@@ -1,0 +1,11 @@
+{
+	"home": {
+		"stats": {
+			"donations": "Total donations",
+			"viewersCount": "Total viewers",
+			"onlineStreams": "Online streams",
+			"mostWatchedChannel": "Most watched channel",
+			"mostWatchedGame": "Most watched game"
+		}
+	}
+}
