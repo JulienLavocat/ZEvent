@@ -18,6 +18,10 @@ const items: { name: string; link: string }[] = [
 		name: "streamers",
 		link: "/streamers",
 	},
+	{
+		name: "games",
+		link: "/games",
+	},
 ];
 
 export default function Navbar({ children }: NavbarProps) {
@@ -47,19 +51,21 @@ export default function Navbar({ children }: NavbarProps) {
 			open={visible}
 			onClickOverlay={toggleVisible}
 			className="font-sans">
-			<NavbarComponent className="relative">
+			<NavbarComponent className="relative  border-b">
 				<div className="flex-none lg:hidden">
 					<Button
 						shape="square"
 						color="ghost"
 						onClick={toggleVisible}>
-						<FaBars />
+						<FaBars size={24} />
 					</Button>
 				</div>
 				<div className="flex-1 px-2 mx-2 absolute left-1/2 right-1/2 w-max -translate-x-1/2">
-					{t(`navbar.items.${title}`, {
-						defaultValue: "ZEvent 2022",
-					})}
+					<h1 className="text-xl">
+						{t(`navbar.items.${title}`, {
+							defaultValue: "ZEvent 2022",
+						})}
+					</h1>
 				</div>
 				<div className="flex-none hidden lg:block">
 					<Menu horizontal>

@@ -11,7 +11,8 @@
 	"navbar": {
 		"items": {
 			"globalStats": "Global statistics",
-			"streamers": "Streamers"
+			"streamers": "Streamers",
+			"games": "Games"
 		}
 	}
 }
