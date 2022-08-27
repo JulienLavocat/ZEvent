@@ -24,7 +24,7 @@ export default function GlobalStats() {
 		const value = data[name];
 		return (
 			<li
-				className="border-t last:border-b p-3"
+				className="border-t last:border-b p-3 first:border-t-0 border-gray-600"
 				key={`home.stats.${name}`}>
 				<h2 className="font-semibold">{t(`home.stats.${name}`)}</h2>
 				<p>

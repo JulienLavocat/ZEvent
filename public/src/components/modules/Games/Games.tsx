@@ -13,7 +13,7 @@ export default function Games() {
 	] = useObjectVal(ref(database, "/games"));
 
 	return (
-		<div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7">
+		<div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
 			{Object.entries(data || {}).map(([id, data]) => (
 				<GameRenderer {...data} key={id} gameId={id} />
 			))}

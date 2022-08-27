@@ -4,6 +4,8 @@ import { FaBars } from "react-icons/fa";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
+import MenuItem from "react-daisyui/dist/Menu/MenuItem";
+import banner from "../../../../public/banner_2022.png";
 
 export type NavbarProps = {
 	children?: React.ReactNode;
@@ -34,13 +36,14 @@ export default function Navbar({ children }: NavbarProps) {
 	const location = useLocation();
 
 	const drawerSide = (
-		<ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+		<Menu className="bg-base-100 text-base-content border-r w-72 border-gray-600">
+			<img src={banner} className="h-24" />
 			{items.map((e) => (
-				<li key={`sidebar.to.${e.name}`}>
+				<Menu.Item key={`sidebar.to.${e.name}`}>
 					<a href={e.link}>{t(`navbar.items.${e.name}`)}</a>
-				</li>
+				</Menu.Item>
 			))}
-		</ul>
+		</Menu>
 	);
 
 	const title = location.pathname.split("/").slice(-1)[0];
@@ -50,8 +53,9 @@ export default function Navbar({ children }: NavbarProps) {
 			side={drawerSide}
 			open={visible}
 			onClickOverlay={toggleVisible}
+			mobile
 			className="font-sans">
-			<NavbarComponent className="relative  border-b">
+			<NavbarComponent className="relative border-b border-gray-600">
 				<div className="flex-none lg:hidden">
 					<Button
 						shape="square"
@@ -66,16 +70,6 @@ export default function Navbar({ children }: NavbarProps) {
 							defaultValue: "ZEvent 2022",
 						})}
 					</h1>
-				</div>
-				<div className="flex-none hidden lg:block">
-					<Menu horizontal>
-						<Menu.Item>
-							<a>Navbar Item 1</a>
-						</Menu.Item>
-						<Menu.Item>
-							<a>Navbar Item 2</a>
-						</Menu.Item>
-					</Menu>
 				</div>
 			</NavbarComponent>
 			{children}

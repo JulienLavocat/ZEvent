@@ -12,7 +12,7 @@ import "./index.css";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<Theme>
+			<Theme dataTheme="forest">
 				<BrowserRouter>
 					<Router />
 				</BrowserRouter>

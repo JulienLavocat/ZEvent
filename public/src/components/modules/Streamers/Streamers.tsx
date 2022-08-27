@@ -16,7 +16,7 @@ export default function Streamers() {
 			<ul>
 				{data.map((e) => (
 					<li
-						className="flex p-3 border-t last:border-b gap-4"
+						className="flex p-3 border-t last:border-b gap-4 first:border-t-0 border-gray-600"
 						key={e.twitch}>
 						<Avatar src={e.profileUrl} shape="circle" />
 						<div className="grow flex flex-col">
