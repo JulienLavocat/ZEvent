@@ -14,6 +14,7 @@ interface StatsData {
 	stats: Stats;
 	streamers: StreamInfos[];
 	games: Record<string, NameViewersPair>;
+	events: any[];
 }
 
 export default async function updateStats(response: Response) {
@@ -41,6 +42,11 @@ export default async function updateStats(response: Response) {
 		},
 		streamers,
 		games,
+		events: zevent.calendar.map((e: any) => ({
+			...e,
+			start: new Date(e.start).toISOString(),
+			end: new Date(e.end).toISOString(),
+		})),
 	};
 
 	await database.getDatabase().ref().set(data);

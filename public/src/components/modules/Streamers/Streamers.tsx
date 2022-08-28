@@ -3,7 +3,7 @@ import React from "react";
 import { Avatar } from "react-daisyui";
 import { useListVals } from "react-firebase-hooks/database";
 import { database } from "../../../firebase";
-import { humanizeNumber } from "../../../utils/humanizeNumber";
+import { humanizeNumber } from "../../../utils/humanize";
 import { StreamInfos } from "../../../utils/interfaces";
 import StreamerListItem from "../../elements/StreamerListItem";
 

@@ -12,7 +12,17 @@
 		"items": {
 			"globalStats": "Global statistics",
 			"streamers": "Streamers",
-			"games": "Games"
+			"games": "Games",
+			"events": "Events"
 		}
+	},
+	"events": {
+		"event": {
+			"details": "Details"
+		}
+	},
+	"event": {
+		"organizers": "Organizers",
+		"participants": "Participants"
 	}
 }

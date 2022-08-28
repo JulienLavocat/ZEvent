@@ -59,3 +59,18 @@ export interface NameViewersPair {
 	name: string;
 	viewers: number;
 }
+
+export interface EventParticipant {
+	display: string;
+	profileUrl: string;
+	twitch: string;
+	url?: string;
+}
+
+export interface Event {
+	start: string;
+	end: string;
+	title: string;
+	organizers: EventParticipant[];
+	participants: EventParticipant[];
+}

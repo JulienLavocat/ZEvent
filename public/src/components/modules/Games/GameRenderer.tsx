@@ -1,5 +1,5 @@
 import React from "react";
-import { humanizeNumber } from "../../../utils/humanizeNumber";
+import { humanizeNumber } from "../../../utils/humanize";
 import { NameViewersPair } from "../../../utils/interfaces";
 
 export default function GameRenderer({

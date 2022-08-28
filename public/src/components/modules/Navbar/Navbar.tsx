@@ -5,26 +5,12 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import MenuItem from "react-daisyui/dist/Menu/MenuItem";
-import banner from "../../../../public/banner_2022.png";
+import banner from "../../../images/banner_2022.png";
+import { items } from "../../../Router";
 
 export type NavbarProps = {
 	children?: React.ReactNode;
 };
-
-const items: { name: string; link: string }[] = [
-	{
-		name: "globalStats",
-		link: "/",
-	},
-	{
-		name: "streamers",
-		link: "/streamers",
-	},
-	{
-		name: "games",
-		link: "/games",
-	},
-];
 
 export default function Navbar({ children }: NavbarProps) {
 	const [visible, setVisible] = useState(false);
@@ -38,11 +24,13 @@ export default function Navbar({ children }: NavbarProps) {
 	const drawerSide = (
 		<Menu className="bg-base-100 text-base-content border-r w-72 border-gray-600">
 			<img src={banner} className="h-24" />
-			{items.map((e) => (
-				<Menu.Item key={`sidebar.to.${e.name}`}>
-					<a href={e.link}>{t(`navbar.items.${e.name}`)}</a>
-				</Menu.Item>
-			))}
+			{items
+				.filter((e) => e.isVisible)
+				.map((e) => (
+					<Menu.Item key={`sidebar.to.${e.name}`}>
+						<a href={e.path}>{t(`navbar.items.${e.name}`)}</a>
+					</Menu.Item>
+				))}
 		</Menu>
 	);
 

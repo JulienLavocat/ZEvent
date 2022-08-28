@@ -3,7 +3,7 @@ import React from "react";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { useTranslation } from "react-i18next";
 import { database } from "../../../firebase";
-import { humanizeNumber } from "../../../utils/humanizeNumber";
+import { humanizeNumber } from "../../../utils/humanize";
 
 const items = [
 	"donations",
