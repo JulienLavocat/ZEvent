@@ -8,12 +8,15 @@ import GlobalStats from "./components/modules/GlobalStats/GlobalStats";
 import Streamers from "./components/modules/Streamers/Streamers";
 import AppLayout from "./layouts/AppLayout";
 
-export const items: {
+interface PageDetails {
 	name: string;
 	path: string;
 	element: React.ReactNode;
 	isVisible: boolean;
-}[] = [
+}
+[];
+
+export const items: PageDetails[] = [
 	{
 		name: "globalStats",
 		path: "/",
@@ -33,21 +36,24 @@ export const items: {
 		isVisible: true,
 	},
 	{
-		name: "",
-		path: "/games/:id",
-		element: <Game />,
-		isVisible: false,
-	},
-	{
 		name: "events",
 		path: "/events",
 		element: <Events />,
 		isVisible: true,
 	},
+];
+
+const specialCases: PageDetails[] = [
 	{
 		name: "",
 		path: "/event",
 		element: <Event />,
+		isVisible: false,
+	},
+	{
+		name: "",
+		path: "/games/:id",
+		element: <Game />,
 		isVisible: false,
 	},
 ];
@@ -58,6 +64,7 @@ const routes: RouteObject[] = [
 		element: <AppLayout />,
 		children: items.map((e) => ({ path: e.path, element: e.element })),
 	},
+	...specialCases.map((e) => ({ path: e.path, element: e.element })),
 ];
 
 export default function Router() {

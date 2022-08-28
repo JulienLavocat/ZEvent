@@ -22,7 +22,7 @@ export default function Events() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const days = new Set<Date>();
+		const days = new Set<string>();
 
 		data?.map<Omit<Event, "start"> & { start: Date }>((e) => ({
 			...e,
@@ -30,17 +30,21 @@ export default function Events() {
 		}))
 			.sort((a, b) => a.start.getTime() - b.start.getTime())
 			.forEach((e) => {
+				if (days.has(e.start.toISOString())) return;
+				days.add(e.start.toISOString());
 				e.start.setHours(0, 0, 0, 0);
-				days.add(e.start);
 			});
 
 		const tabs = [...days].map((e) => ({
-			value: e,
+			value: new Date(e),
 			content:
 				data?.filter((event) => {
 					const date = new Date(event.start);
 					date.setHours(0, 0, 0, 0);
-					return date.getTime() === e.getTime();
+					const dayDate = new Date(e);
+					dayDate.setHours(0, 0, 0, 0);
+
+					return date.getTime() === dayDate.getTime();
 				}) || [],
 		}));
 		setTabs(tabs);
@@ -63,7 +67,7 @@ export default function Events() {
 				))}
 			</Tabs>
 			{tabs[tabIndex] && (
-				<div className="p-2">
+				<div className="p-2 flex flex-col gap-2">
 					{tabs[tabIndex].content.map((ev, i) => (
 						<div
 							onClick={() => {
@@ -72,12 +76,12 @@ export default function Events() {
 							}}
 							className="bg-black p-4 rounded-md shadow flex flex-col cursor-pointer"
 							key={ev.title + i}>
-							<h2>{ev.title}</h2>
+							<h2 className="text-lg mb-2">{ev.title}</h2>
 							<p>
 								{humanizeHours(new Date(ev.start))} -{" "}
 								{humanizeHours(new Date(ev.end))}
 							</p>
-							<p>
+							<p className="text-sm mt-1">
 								{ev.organizers.map((e) => e.display).join(", ")}
 							</p>
 							<Button
