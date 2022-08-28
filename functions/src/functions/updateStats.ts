@@ -1,4 +1,4 @@
-import { Response } from "firebase-functions";
+import * as database from "firebase-admin/database";
 import { Stream } from "node-twitch/dist/types/objects";
 import { getZEvent } from "../utils/getZevent";
 import {
@@ -8,7 +8,6 @@ import {
 	StreamInfos,
 } from "../utils/structures";
 import { createTwitchClient } from "../utils/twitch";
-import * as database from "firebase-admin/database";
 
 interface StatsData {
 	stats: Stats;
@@ -17,7 +16,7 @@ interface StatsData {
 	events: any[];
 }
 
-export default async function updateStats(response: Response) {
+export default async function updateStats() {
 	const zevent = await getZEvent();
 	const streamers = await enrichStream(zevent.live);
 
@@ -50,7 +49,7 @@ export default async function updateStats(response: Response) {
 	};
 
 	await database.getDatabase().ref().set(data);
-	response.json(data);
+	return data;
 }
 
 async function enrichStream(channels: StreamerData[]): Promise<StreamInfos[]> {
