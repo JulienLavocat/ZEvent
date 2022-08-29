@@ -52,7 +52,7 @@ const specialCases: PageDetails[] = [
 	},
 	{
 		name: "",
-		path: "/games/:id",
+		path: "/game",
 		element: <Game />,
 		isVisible: false,
 	},

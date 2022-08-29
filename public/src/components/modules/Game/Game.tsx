@@ -5,17 +5,18 @@ import { useObjectVal } from "react-firebase-hooks/database";
 import { FaArrowLeft } from "react-icons/fa";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { database } from "../../../firebase";
+import { useAppSelector } from "../../../store";
 import { StreamInfos } from "../../../utils/interfaces";
 import StreamerListItem from "../../elements/StreamerListItem";
 
 export default function Game() {
-	const params = useParams();
 	const navigate = useNavigate();
+	const game = useAppSelector((state) => state.event.game);
 	const [data]: [StreamInfos[] | null | undefined, any, any] = useObjectVal(
 		query(
 			ref(database, "/streamers"),
 			orderByChild("gameId"),
-			equalTo(params.id || "")
+			equalTo(game?.gameId || "")
 		)
 	);
 
@@ -23,7 +24,7 @@ export default function Game() {
 		navigate("/games");
 	};
 
-	if (!params.id) returnToGames();
+	if (!game) returnToGames();
 
 	return (
 		<div className="h-screen w-screen">
@@ -32,7 +33,7 @@ export default function Game() {
 					<FaArrowLeft size={24} />
 				</Button>
 				<h1 className="absolute left-1/2 right-1/2 w-max -translate-x-1/2 text-lg">
-					{params.id}
+					{game?.name}
 				</h1>
 			</Navbar>
 			<ul>
