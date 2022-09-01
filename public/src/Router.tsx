@@ -5,6 +5,7 @@ import Events from "./components/modules/Events/Events";
 import Game from "./components/modules/Game/Game";
 import Games from "./components/modules/Games/Games";
 import GlobalStats from "./components/modules/GlobalStats/GlobalStats";
+import Notifications from "./components/modules/Notifications/Notifications";
 import Streamers from "./components/modules/Streamers/Streamers";
 import AppLayout from "./layouts/AppLayout";
 
@@ -39,6 +40,12 @@ export const items: PageDetails[] = [
 		name: "events",
 		path: "/events",
 		element: <Events />,
+		isVisible: true,
+	},
+	{
+		name: "notifications",
+		path: "/notifications",
+		element: <Notifications />,
 		isVisible: true,
 	},
 ];

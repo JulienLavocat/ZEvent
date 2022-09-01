@@ -13,7 +13,8 @@
 			"globalStats": "Global statistics",
 			"streamers": "Streamers",
 			"games": "Games",
-			"events": "Events"
+			"events": "Events",
+			"notifications": "Notifications"
 		}
 	},
 	"events": {

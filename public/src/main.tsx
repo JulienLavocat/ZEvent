@@ -8,11 +8,13 @@ import { store } from "./store";
 import "./firebase";
 import "./i18n";
 import "./index.css";
+import ReloadPrompt from "./components/modules/ReloadPrompt/ReloadPrompt";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<Theme dataTheme="forest">
+				<ReloadPrompt />
 				<BrowserRouter>
 					<Router />
 				</BrowserRouter>

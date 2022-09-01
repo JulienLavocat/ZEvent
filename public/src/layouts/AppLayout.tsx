@@ -7,7 +7,6 @@ import { useAppSelector } from "../store";
 
 export default function AppLayout() {
 	const showNewUser = useAppSelector((state) => state.app.showNewUser);
-	console.log(showNewUser);
 
 	return (
 		<>

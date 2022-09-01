@@ -67,3 +67,5 @@ node_modules/
 .runtimeconfig.json
 
 emulators-data
+
+public/dev-dist
