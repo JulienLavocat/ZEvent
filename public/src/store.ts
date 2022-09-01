@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import event from "./features/eventSlice";
+import app from "./features/appSlice";
 
 export const store = configureStore({
-	reducer: { event },
+	reducer: { app },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

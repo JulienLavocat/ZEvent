@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setGame } from "../../../features/eventSlice";
+import { setGame } from "../../../features/appSlice";
 import { humanizeNumber } from "../../../utils/humanize";
 import { NameViewersPair } from "../../../utils/interfaces";
 

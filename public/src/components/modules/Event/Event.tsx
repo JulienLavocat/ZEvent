@@ -8,7 +8,7 @@ import { Event as EventModel, StreamInfos } from "../../../utils/interfaces";
 import StreamerListItem from "../../elements/StreamerListItem";
 
 export default function Event() {
-	const { event } = useAppSelector((state) => state.event);
+	const { event: app } = useAppSelector((state) => state.app);
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const [currentTab, setCurrentTab] =
@@ -20,7 +20,7 @@ export default function Event() {
 		navigate("/events");
 	};
 
-	if (!event) {
+	if (!app) {
 		returnToEvents();
 	}
 
@@ -31,7 +31,7 @@ export default function Event() {
 					<FaArrowLeft size={24} />
 				</Button>
 				<h1 className="absolute left-1/2 right-1/2 w-max -translate-x-1/2 text-lg">
-					{event?.title}
+					{app?.title}
 				</h1>
 			</Navbar>
 			<Tabs
@@ -51,9 +51,9 @@ export default function Event() {
 					{t("event.participants")}
 				</Tabs.Tab>
 			</Tabs>
-			{event && (
+			{app && (
 				<ul>
-					{event[currentTab].map((e) => (
+					{app[currentTab].map((e) => (
 						<StreamerListItem
 							{...(e as StreamInfos)}
 							compact

@@ -11,7 +11,7 @@ import StreamerListItem from "../../elements/StreamerListItem";
 
 export default function Game() {
 	const navigate = useNavigate();
-	const game = useAppSelector((state) => state.event.game);
+	const game = useAppSelector((state) => state.app.game);
 	const [data]: [StreamInfos[] | null | undefined, any, any] = useObjectVal(
 		query(
 			ref(database, "/streamers"),

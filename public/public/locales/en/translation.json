@@ -24,5 +24,13 @@
 	"event": {
 		"organizers": "Organizers",
 		"participants": "Participants"
+	},
+	"newUser": {
+		"title": "Welcome to the ZEvent 2022",
+		"body": "This application is an helper aimed to ease the navigation accross all ZEvent's streams. You will be able to see all streams, games, donations goals and statistics of the weekend.",
+		"features": [
+			"qsd",
+			"qwsd"
+		]
 	}
 }

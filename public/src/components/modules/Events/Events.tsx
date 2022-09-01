@@ -6,7 +6,7 @@ import { useListVals, useObjectVal } from "react-firebase-hooks/database";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setEvent } from "../../../features/eventSlice";
+import { setEvent } from "../../../features/appSlice";
 import { database } from "../../../firebase";
 import { humanizeDate, humanizeHours } from "../../../utils/humanize";
 import { Event } from "../../../utils/interfaces";
