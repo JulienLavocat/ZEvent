@@ -16,7 +16,16 @@ export interface NumberDisplay {
 }
 
 export interface DonationGoal {
-	donationAmount: NumberDisplay;
+	displayName: string;
+	twitch: string;
+	profileUrl: string;
+	donationGoals: {
+		name: string;
+		type: string;
+		amount: number;
+		achievedAt: string;
+		done: boolean;
+	}[];
 }
 
 export interface StreamerData {
@@ -74,4 +83,10 @@ export interface Event {
 	organizers: EventParticipant[];
 	participants: EventParticipant[];
 	description: string | null;
+}
+
+interface Participant {
+	display: string;
+	profileUrl: string;
+	twitch: string;
 }

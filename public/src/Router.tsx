@@ -1,5 +1,6 @@
 import React from "react";
 import { RouteObject, useRoutes } from "react-router-dom";
+import DonationGoals from "./components/modules/DonationGoals/DonationGoals";
 import Event from "./components/modules/Event/Event";
 import Events from "./components/modules/Events/Events";
 import Game from "./components/modules/Game/Game";
@@ -34,6 +35,12 @@ export const items: PageDetails[] = [
 		name: "games",
 		path: "/games",
 		element: <Games />,
+		isVisible: true,
+	},
+	{
+		name: "donation-goals",
+		path: "/donation-goals",
+		element: <DonationGoals />,
 		isVisible: true,
 	},
 	{

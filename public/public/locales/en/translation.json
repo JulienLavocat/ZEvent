@@ -15,12 +15,16 @@
 			"streamers": "Streamers",
 			"games": "Games",
 			"events": "Events",
-			"notifications": "Notifications"
+			"notifications": "Notifications",
+			"donation-goals": "Donation goals"
 		}
+	},
+	"donation-goals": {
+		"no-goals": "No donation goals"
 	},
 	"events": {
 		"event": {
-			"details": "Details"
+			"details": "See participants"
 		}
 	},
 	"event": {

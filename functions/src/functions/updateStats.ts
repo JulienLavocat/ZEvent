@@ -18,6 +18,19 @@ interface Participant {
 	twitch: string;
 }
 
+interface DonationGoal {
+	displayName: string;
+	twitch: string;
+	profileUrl: string;
+	donationGoals: {
+		name: string;
+		type: string;
+		amount: number;
+		achievedAt: string;
+		done: boolean;
+	}[];
+}
+
 interface StatsData {
 	stats: Stats;
 	streamers: StreamInfos[];
@@ -31,6 +44,7 @@ interface StatsData {
 		description: string | null;
 	}[];
 	updatedAt: string;
+	donationGoals: DonationGoal[];
 }
 
 export default async function updateStats() {
@@ -45,6 +59,13 @@ export default async function updateStats() {
 	let events: StatsData["events"] = [];
 	try {
 		events = await loadEvents();
+	} catch (error) {
+		console.error(error);
+	}
+
+	let donationGoals: StatsData["donationGoals"] = [];
+	try {
+		donationGoals = await loadDonationGoals();
 	} catch (error) {
 		console.error(error);
 	}
@@ -66,6 +87,7 @@ export default async function updateStats() {
 		streamers,
 		games,
 		events,
+		donationGoals,
 		updatedAt: new Date().toISOString(),
 	};
 
@@ -180,5 +202,35 @@ async function loadEvents(): Promise<StatsData["events"]> {
 				twitch: p.id,
 			})) || [],
 		description: e.description,
+	}));
+}
+
+async function loadDonationGoals(): Promise<DonationGoal[]> {
+	const data = (await fetch("https://zevent.gdoc.fr/api/donation-goals.json")
+		.then((r) => r.json())
+		.then((r) => r.data)) as {
+		name: string;
+		twitch_login: string;
+		profile_url: string;
+		donation_goals: {
+			name: string;
+			type: string;
+			amount: number;
+			achieved_at: string;
+			done: boolean;
+		}[];
+	}[];
+
+	return data.map((e) => ({
+		displayName: e.name,
+		profileUrl: e.profile_url,
+		twitch: e.twitch_login,
+		donationGoals: e.donation_goals.map((e) => ({
+			name: e.name,
+			type: e.type,
+			amount: e.amount,
+			achievedAt: e.achieved_at,
+			done: e.done,
+		})),
 	}));
 }
