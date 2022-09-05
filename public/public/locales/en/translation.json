@@ -6,7 +6,8 @@
 			"onlineStreams": "Online streams",
 			"mostWatchedChannel": "Most watched channel",
 			"mostWatchedGame": "Most watched game"
-		}
+		},
+		"updatedAt": "Last updated at: {{updatedAt}}"
 	},
 	"navbar": {
 		"items": {

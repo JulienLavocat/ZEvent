@@ -21,7 +21,8 @@ export const humanizeDate = (value: Date) => {
 
 export const humanizeHours = (value: Date) => {
 	return new Intl.DateTimeFormat(locale, {
-		hour12: false,
+		// hour12: false,
+		hourCycle: "h23",
 		hour: "2-digit",
 		minute: "numeric",
 	}).format(value);

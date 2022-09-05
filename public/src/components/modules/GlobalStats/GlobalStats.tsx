@@ -3,7 +3,7 @@ import React from "react";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { useTranslation } from "react-i18next";
 import { database } from "../../../firebase";
-import { humanizeNumber } from "../../../utils/humanize";
+import { humanizeHours, humanizeNumber } from "../../../utils/humanize";
 
 const items = [
 	"donations",
@@ -24,6 +24,7 @@ export default function GlobalStats() {
 	const [data] = useObjectVal<
 		Record<string, number | { name: string; viewers: number }>
 	>(ref(database, "/stats"));
+	const [updatedAt] = useObjectVal<string>(ref(database, "/updatedAt"));
 	const { t } = useTranslation();
 
 	const listItem = (name: string) => {
@@ -51,6 +52,13 @@ export default function GlobalStats() {
 	return (
 		<div>
 			<ul>{items.map((e) => listItem(e))}</ul>
+			{updatedAt && (
+				<p className="text-center mt-4">
+					{t("home.updatedAt", {
+						updatedAt: humanizeHours(new Date(updatedAt)),
+					})}
+				</p>
+			)}
 		</div>
 	);
 }
