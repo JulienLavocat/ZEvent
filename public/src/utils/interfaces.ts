@@ -73,4 +73,5 @@ export interface Event {
 	title: string;
 	organizers: EventParticipant[];
 	participants: EventParticipant[];
+	description: string | null;
 }

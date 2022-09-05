@@ -28,6 +28,7 @@ interface StatsData {
 		organizers: Participant[];
 		participants: Participant[];
 		title: string;
+		description: string | null;
 	}[];
 	updatedAt: string;
 }
@@ -160,6 +161,7 @@ async function loadEvents(): Promise<StatsData["events"]> {
 		finished_at: string;
 		hosts: any[];
 		participants: any[];
+		description: string | null;
 	}[];
 	return events.map((e) => ({
 		end: e.finished_at,
@@ -177,5 +179,6 @@ async function loadEvents(): Promise<StatsData["events"]> {
 				profileUrl: p.profile_url,
 				twitch: p.id,
 			})) || [],
+		description: e.description,
 	}));
 }

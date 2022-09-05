@@ -78,6 +78,7 @@ export default function Events() {
 							className="bg-black p-4 rounded-md shadow flex flex-col cursor-pointer"
 							key={ev.title + i}>
 							<h2 className="text-lg mb-2">{ev.title}</h2>
+							<p className="mb-2">{ev?.description}</p>
 							<p>
 								{humanizeHours(new Date(ev.start))} -{" "}
 								{humanizeHours(new Date(ev.end))}
