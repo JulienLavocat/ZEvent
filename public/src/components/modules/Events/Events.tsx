@@ -30,9 +30,10 @@ export default function Events() {
 		}))
 			.sort((a, b) => a.start.getTime() - b.start.getTime())
 			.forEach((e) => {
-				if (days.has(e.start.toISOString())) return;
-				days.add(e.start.toISOString());
-				e.start.setHours(0, 0, 0, 0);
+				const date = e.start;
+				date.setHours(0, 0, 0, 0);
+				if (days.has(date.toISOString())) return;
+				days.add(date.toISOString());
 			});
 
 		const tabs = [...days].map((e) => ({
@@ -82,7 +83,9 @@ export default function Events() {
 								{humanizeHours(new Date(ev.end))}
 							</p>
 							<p className="text-sm mt-1">
-								{ev.organizers.map((e) => e.display).join(", ")}
+								{ev.organizers
+									?.map((e) => e.display)
+									.join(", ")}
 							</p>
 							<Button
 								color="ghost"

@@ -8,12 +8,27 @@ import {
 	StreamInfos,
 } from "../utils/structures";
 import { createTwitchClient } from "../utils/twitch";
+import fetch from "node-fetch";
+
+const dates = ["2022-09-08", "2022-09-09", "2022-09-10", "2022-09-11"];
+
+interface Participant {
+	display: string;
+	profileUrl: string;
+	twitch: string;
+}
 
 interface StatsData {
 	stats: Stats;
 	streamers: StreamInfos[];
 	games: Record<string, NameViewersPair>;
-	events: any[];
+	events: {
+		end: string;
+		start: string;
+		organizers: Participant[];
+		participants: Participant[];
+		title: string;
+	}[];
 	updatedAt: string;
 }
 
@@ -25,6 +40,13 @@ export default async function updateStats() {
 		previous.viewers > current.viewers ? previous : current
 	);
 	const games = processGames(streamers);
+
+	let events: StatsData["events"] = [];
+	try {
+		events = await loadEvents();
+	} catch (error) {
+		console.error(error);
+	}
 
 	const data: StatsData = {
 		stats: {
@@ -42,11 +64,7 @@ export default async function updateStats() {
 		},
 		streamers,
 		games,
-		events: zevent.calendar.map((e: any) => ({
-			...e,
-			start: new Date(e.start).toISOString(),
-			end: new Date(e.end).toISOString(),
-		})),
+		events,
 		updatedAt: new Date().toISOString(),
 	};
 
@@ -125,4 +143,39 @@ function getMostWatchedGame(games: Record<string, NameViewersPair>) {
 		}
 	});
 	return mostWatchedGame;
+}
+
+async function loadEvents(): Promise<StatsData["events"]> {
+	const events = (
+		await Promise.all(
+			dates.map((date) =>
+				fetch(`https://zevent.gdoc.fr/api/events/${date}.json`)
+					.then((r) => r.json())
+					.then((r) => r.data)
+			)
+		)
+	).flat() as {
+		name: string;
+		start_at: string;
+		finished_at: string;
+		hosts: any[];
+		participants: any[];
+	}[];
+	return events.map((e) => ({
+		end: e.finished_at,
+		start: e.start_at,
+		title: e.name,
+		participants:
+			e.participants.map<Participant>((p) => ({
+				display: p.name,
+				profileUrl: p.profile_url,
+				twitch: p.id,
+			})) || [],
+		organizers:
+			e.hosts.map<Participant>((p) => ({
+				display: p.name,
+				profileUrl: p.profile_url,
+				twitch: p.id,
+			})) || [],
+	}));
 }
