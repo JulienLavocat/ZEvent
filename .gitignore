@@ -69,3 +69,4 @@ node_modules/
 emulators-data
 
 public/dev-dist
+service-account.json

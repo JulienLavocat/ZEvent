@@ -33,5 +33,13 @@
 			"qsd",
 			"qwsd"
 		]
+	},
+	"notifications": {
+		"no-permission": "You need to allow notifications permissions to use this feature",
+		"ask-for-permission": "Request permission",
+		"login-methods": {
+			"anonymous": "Anonymous",
+			"google": "Google"
+		}
 	}
 }

@@ -1,5 +1,9 @@
-import { initializeApp } from "firebase/app";
-import { connectDatabaseEmulator, getDatabase } from "firebase/database";
+importScripts(
+	"https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"
+);
+importScripts(
+	"https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js"
+);
 
 const firebaseConfig = {
 	apiKey: "AIzaSyDNkffNX8zbJCMZNlQ_RhQdrxsvo_aspj0",
@@ -12,11 +16,9 @@ const firebaseConfig = {
 	measurementId: "G-34525FGWNN",
 };
 
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+const app = firebase.initializeApp(firebaseConfig);
+const messaging = firebase.messaging(app);
 
-if (import.meta.env.DEV) {
-	connectDatabaseEmulator(database, "localhost", 9000);
-}
-
-export { app, database };
+messaging.onMessage((payload) => {
+	console.log("sw", payload);
+});

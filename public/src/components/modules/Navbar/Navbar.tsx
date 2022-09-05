@@ -60,7 +60,7 @@ export default function Navbar({ children }: NavbarProps) {
 					</h1>
 				</div>
 			</NavbarComponent>
-			{children}
+			<>{children}</>
 		</Drawer>
 	);
 }

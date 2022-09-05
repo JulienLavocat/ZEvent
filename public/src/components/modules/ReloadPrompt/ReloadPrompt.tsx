@@ -3,6 +3,11 @@ import "./ReloadPrompt.css";
 
 import { useRegisterSW } from "virtual:pwa-register/react";
 
+const broadcast = new BroadcastChannel("count-channel");
+broadcast.onmessage = (event) => {
+	console.log("got event:", event);
+};
+
 function ReloadPrompt() {
 	const {
 		offlineReady: [offlineReady, setOfflineReady],
@@ -10,7 +15,6 @@ function ReloadPrompt() {
 		updateServiceWorker,
 	} = useRegisterSW({
 		onRegistered(r) {
-			// eslint-disable-next-line prefer-template
 			console.log("SW Registered: ", r);
 		},
 		onRegisterError(error) {

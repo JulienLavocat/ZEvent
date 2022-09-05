@@ -5,7 +5,7 @@ export interface StreamInfos {
 	online: boolean;
 	game: string;
 	viewers: number;
-	donationGoal: any;
+	// donationGoal: any;
 	title: string;
 	gameId: string;
 }

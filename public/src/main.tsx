@@ -9,6 +9,7 @@ import "./firebase";
 import "./i18n";
 import "./index.css";
 import ReloadPrompt from "./components/modules/ReloadPrompt/ReloadPrompt";
+import { ToastContainer } from "react-toastify";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<React.StrictMode>
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 				<BrowserRouter>
 					<Router />
 				</BrowserRouter>
+				<ToastContainer />
 			</Theme>
 		</Provider>
 	</React.StrictMode>

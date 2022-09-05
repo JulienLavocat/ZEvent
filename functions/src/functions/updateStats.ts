@@ -1,5 +1,5 @@
+import { HelixStream } from "@twurple/api";
 import * as database from "firebase-admin/database";
-import { Stream } from "node-twitch/dist/types/objects";
 import { getZEvent } from "../utils/getZevent";
 import {
 	NameViewersPair,
@@ -14,6 +14,7 @@ interface StatsData {
 	streamers: StreamInfos[];
 	games: Record<string, NameViewersPair>;
 	events: any[];
+	updatedAt: string;
 }
 
 export default async function updateStats() {
@@ -46,6 +47,7 @@ export default async function updateStats() {
 			start: new Date(e.start).toISOString(),
 			end: new Date(e.end).toISOString(),
 		})),
+		updatedAt: new Date().toISOString(),
 	};
 
 	await database.getDatabase().ref().set(data);
@@ -55,40 +57,40 @@ export default async function updateStats() {
 async function enrichStream(channels: StreamerData[]): Promise<StreamInfos[]> {
 	const twitch = createTwitchClient();
 
-	const streams = new Map<string, Stream>();
+	const streams = new Map<string, HelixStream>();
 	(
-		await twitch.getStreams({
-			channels: channels.map((e) => e.twitch),
-		})
-	).data.forEach((e) => {
-		streams.set((e as any).user_login, e);
+		await twitch.streams.getStreamsByUserNames(
+			channels.map((e) => e.twitch)
+		)
+	).forEach((e) => {
+		streams.set(e.userName, e);
 	});
 
 	const lives: StreamInfos[] = [];
 	for (const l of channels) {
 		const hasStream = streams.has(l.twitch);
-		const stream = streams.get(l.twitch) as Stream;
+		const stream = streams.get(l.twitch) as HelixStream;
 		const game = hasStream
-			? (stream as any).game_name === ""
+			? stream.gameName === ""
 				? "Non défini"
-				: (stream as any).game_name
+				: stream.gameName
 			: "Offline";
 
 		lives.push({
 			display: l.display,
-			donationGoal: {
-				donationAmount: l.donationGoal.donationAmount.number,
-			},
+			// donationGoal: {
+			// 	donationAmount: l.donationGoal.donationAmount.number,
+			// },
 			profileUrl: l.profileUrl,
 			twitch: l.twitch,
 			online: hasStream,
 			game: game,
-			viewers: hasStream ? stream.viewer_count : 0,
+			viewers: hasStream ? stream.viewers : 0,
 			title: hasStream ? stream.title : "Offline",
 			gameId: hasStream
-				? stream.game_id === ""
+				? stream.gameId === ""
 					? "-1"
-					: stream.game_id
+					: stream.gameId
 				: "offline",
 		});
 	}

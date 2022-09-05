@@ -8,12 +8,16 @@ export interface AppState {
 	event: Event | null;
 	game: { name: string; gameId: string } | null;
 	showNewUser: boolean;
+	user: {
+		fcmToken?: string;
+	};
 }
 
 const initialState: AppState = {
 	event: null,
 	game: null,
 	showNewUser: !localStorage.getItem(DISABLE_NEW_USER),
+	user: {},
 };
 
 export const appSlice = createSlice({
@@ -30,9 +34,13 @@ export const appSlice = createSlice({
 			state.showNewUser = false;
 			localStorage.setItem(DISABLE_NEW_USER, "true");
 		},
+		setFcmToken: (state, action: PayloadAction<string>) => {
+			state.user.fcmToken = action.payload;
+		},
 	},
 });
 
-export const { setEvent, setGame } = appSlice.actions;
+export const { setEvent, setGame, disableNewUser, setFcmToken } =
+	appSlice.actions;
 
 export default appSlice.reducer;
