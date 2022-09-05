@@ -14,13 +14,12 @@ export default function AppLayout() {
 	const [user, isAuthLoading] = useAuthState(auth);
 
 	useEffect(() => {
-		if (!user && !isAuthLoading) {
-			console.log("login");
-			signInAnonymously(auth);
-		}
+		signInAnonymously(auth)
+			.then((r) => console.log("signed in", r))
+			.catch((r) => console.log("sign in error", r));
 
 		return () => {};
-	}, [user]);
+	}, []);
 
 	if (!user)
 		return (
