@@ -1,7 +1,8 @@
 import * as functions from "firebase-functions";
 import updateStats from "./functions/updateStats";
 import * as admin from "firebase-admin";
-import { beforeUserCreate } from "./functions/beforeUserCreate";
+import { onUserCreate as onUserCreateFunction } from "./functions/onUserCreate";
+import { onUserDelete as onUserDeleteFunction } from "./functions/onUserDelete";
 import { subscribeToTopic as subscribeToTopicFunction } from "./functions/subscribeToTopic";
 import { collectGames as collectGamesFunction } from "./functions/collectGames";
 import { unsubscribeFromTopic as unsubscribeFromTopicFunction } from "./functions/unsubscribeFromTopic";
@@ -51,9 +52,13 @@ export const manualCollectGames = functions
 		res.send("done");
 	});
 
-export const onUserCreate = functions.auth.user().onCreate((user) => {
-	beforeUserCreate(user);
-});
+export const onUserCreate = functions.auth
+	.user()
+	.onCreate(onUserCreateFunction);
+
+export const onUserDelete = functions.auth
+	.user()
+	.onDelete(onUserDeleteFunction);
 
 export const subscribeToTopic = functions.https.onCall(
 	subscribeToTopicFunction
