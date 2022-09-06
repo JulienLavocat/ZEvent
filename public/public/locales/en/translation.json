@@ -64,7 +64,11 @@
 				},
 				"game": {
 					"name": "Game",
-					"example": "<streamer> plays at <selected game>"
+					"example": "<streamer> plays at <selected game>",
+					"search": "Search game",
+					"all": "all",
+					"empty-for-all": "Leave empty for all games",
+					"game-selected": "Selected: {{game}}"
 				},
 				"streamerAndGame": {
 					"name": "Streamer plays at game",

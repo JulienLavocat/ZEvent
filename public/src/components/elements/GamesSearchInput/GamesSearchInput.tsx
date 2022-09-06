@@ -4,6 +4,7 @@ import { functions } from "../../../firebase";
 import debounce from "lodash.debounce";
 import { Dropdown, Input, Menu } from "react-daisyui";
 import AutoComplete from "react-autocomplete";
+import { t } from "i18next";
 
 const searchGamesFunction = httpsCallable(functions, "searchGames");
 
@@ -38,6 +39,7 @@ export default function GamesSearchInput({
 						debouncedSearchGames(e.target.value);
 						setCurrentValue(e.target.value);
 					}}
+					placeholder={t("notifications.add.types.game.search")}
 				/>
 			</div>
 			<Menu className="box-border bg-base-100 max-h-48 overflow-y-scroll">
