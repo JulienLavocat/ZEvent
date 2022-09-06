@@ -23,6 +23,7 @@
 		"no-goals": "No donation goals",
 		"simple": "Simple",
 		"recurent": "Recurent",
+		"equal": "Equal",
 		"achievedAt": "Achieved at {{achievedAt}}"
 	},
 	"events": {

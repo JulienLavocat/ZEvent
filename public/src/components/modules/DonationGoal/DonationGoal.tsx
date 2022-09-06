@@ -42,6 +42,12 @@ export default function DonationGoal() {
 					className="grow h-[inherit] leading-[inherit] p-3">
 					{t("donation-goals.recurent")}
 				</Tabs.Tab>
+				<Tabs.Tab
+					key="equal"
+					value="equal"
+					className="grow h-[inherit] leading-[inherit] p-3">
+					{t("donation-goals.equal")}
+				</Tabs.Tab>
 			</Tabs>
 			{goal?.donationGoals && (
 				<ul className="pb-4">

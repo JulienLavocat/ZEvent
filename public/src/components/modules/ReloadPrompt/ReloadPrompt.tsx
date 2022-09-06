@@ -12,7 +12,7 @@ function ReloadPrompt() {
 	const {
 		offlineReady: [offlineReady, setOfflineReady],
 		needRefresh: [needRefresh, setNeedRefresh],
-		updateServiceWorker,
+		// updateServiceWorker,
 	} = useRegisterSW({
 		onRegistered(r) {
 			console.log("SW Registered: ", r);
@@ -22,14 +22,14 @@ function ReloadPrompt() {
 		},
 	});
 
-	const close = () => {
-		setOfflineReady(false);
-		setNeedRefresh(false);
-	};
+	// const close = () => {
+	// 	setOfflineReady(false);
+	// 	setNeedRefresh(false);
+	// };
 
 	return (
 		<div className="ReloadPrompt-container">
-			{(offlineReady || needRefresh) && (
+			{/* {(offlineReady || needRefresh) && (
 				<div className="ReloadPrompt-toast">
 					<div className="ReloadPrompt-message">
 						{offlineReady ? (
@@ -54,7 +54,7 @@ function ReloadPrompt() {
 						Close
 					</button>
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 }
