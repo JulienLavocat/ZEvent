@@ -21,20 +21,26 @@ export default function Navbar({ children }: NavbarProps) {
 	const { t } = useTranslation();
 	const location = useLocation();
 
+	const title = location.pathname.split("/").slice(-1)[0];
+
 	const drawerSide = (
 		<Menu className="bg-base-100 text-base-content border-r w-72 border-gray-600">
 			<img src={banner} className="h-24" />
 			{items
 				.filter((e) => e.isVisible)
 				.map((e) => (
-					<Menu.Item key={`sidebar.to.${e.name}`}>
+					<Menu.Item
+						key={`sidebar.to.${e.name}`}
+						className={
+							title === e.path.split("/")[1]
+								? "bg-primary text-primary-content"
+								: ""
+						}>
 						<a href={e.path}>{t(`navbar.items.${e.name}`)}</a>
 					</Menu.Item>
 				))}
 		</Menu>
 	);
-
-	const title = location.pathname.split("/").slice(-1)[0];
 
 	return (
 		<Drawer
