@@ -1,17 +1,20 @@
 import { ref } from "firebase/database";
-import { t } from "i18next";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import {
+	forwardRef,
+	useContext,
+	useImperativeHandle,
+	useMemo,
+	useState,
+} from "react";
 import { Select } from "react-daisyui";
-import { useListVals, useObjectVal } from "react-firebase-hooks/database";
+import { useListVals } from "react-firebase-hooks/database";
 import { useTranslation } from "react-i18next";
 import { FaSpinner } from "react-icons/fa";
-import { AddNotificationContext } from ".";
 import { database } from "../../../../firebase";
 import { StreamerData } from "../../../../utils/interfaces";
 
-export default function StreamerNotification() {
+export default forwardRef<{ getTopic: () => string }>(({}, reactRef) => {
 	const { t } = useTranslation();
-	const { onTopicSelected } = useContext(AddNotificationContext);
 	const [streamers]: [StreamerData[] | undefined, boolean, any] = useListVals(
 		ref(database, "/streamers")
 	);
@@ -40,14 +43,13 @@ export default function StreamerNotification() {
 	}, [streamers]);
 	const [currentValue, setCurrentValue] = useState("all");
 
-	if (!streamers) return <FaSpinner className="animate-spin" />;
+	useImperativeHandle(reactRef, () => ({
+		getTopic() {
+			return currentValue === "all" ? "online" : `online.${currentValue}`;
+		},
+	}));
 
-	useEffect(() => {
-		onTopicSelected(
-			currentValue === "all" ? "online" : `online.${currentValue}`
-		);
-		return () => {};
-	}, [currentValue]);
+	if (!streamers) return <FaSpinner className="animate-spin" />;
 
 	return (
 		<Select value={currentValue} onChange={setCurrentValue}>
@@ -58,4 +60,4 @@ export default function StreamerNotification() {
 			))}
 		</Select>
 	);
-}
+});

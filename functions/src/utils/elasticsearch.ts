@@ -1,7 +1,7 @@
 import { Client } from "@elastic/elasticsearch";
 import { HelixGameData } from "@twurple/api/lib/api/helix/game/HelixGame";
 
-const elasticIndex = "games_autocomplete";
+const GAMES_SEARCH_INDEX = "games_autocomplete";
 
 const elastic = new Client({
 	node: process.env.ELASTIC_HOST || "http://localhost:9200",
@@ -17,7 +17,7 @@ const elastic = new Client({
 export const ensureIndex = () =>
 	elastic.indices.create(
 		{
-			index: elasticIndex,
+			index: GAMES_SEARCH_INDEX,
 			body: {
 				mappings: {
 					properties: {
@@ -35,7 +35,7 @@ export const bulkInsertGames = (games: HelixGameData[]) =>
 	elastic.bulk({
 		refresh: true,
 		body: games.flatMap((game) => [
-			{ index: { _index: elasticIndex, _id: game.id } },
+			{ index: { _index: GAMES_SEARCH_INDEX, _id: game.id } },
 			{
 				id: game.id,
 				name: game.name,
@@ -43,3 +43,16 @@ export const bulkInsertGames = (games: HelixGameData[]) =>
 			},
 		]),
 	});
+
+export const searchGames = (query: string) => {
+	return elastic.search({
+		index: GAMES_SEARCH_INDEX,
+		query: {
+			multi_match: {
+				query,
+				type: "bool_prefix",
+				fields: ["name", "name._2gram", "name._3gram"],
+			},
+		},
+	});
+};

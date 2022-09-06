@@ -5,6 +5,7 @@ import { beforeUserCreate } from "./functions/beforeUserCreate";
 import { subscribeToTopic as subscribeToTopicFunction } from "./functions/subscribeToTopic";
 import { collectGames as collectGamesFunction } from "./functions/collectGames";
 import { unsubscribeFromTopic as unsubscribeFromTopicFunction } from "./functions/unsubscribeFromTopic";
+import { searchGames as searchGamesFunction } from "./functions/searchGames";
 
 admin.initializeApp();
 
@@ -61,3 +62,9 @@ export const subscribeToTopic = functions.https.onCall(
 export const unsubscribeFromTopic = functions.https.onCall(
 	unsubscribeFromTopicFunction
 );
+
+export const searchGames = functions
+	.runWith({
+		secrets: ["ELASTIC_HOST", "ELASTIC_USERNAME", "ELASTIC_PASSWORD"],
+	})
+	.https.onCall(searchGamesFunction);
