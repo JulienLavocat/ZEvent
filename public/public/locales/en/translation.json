@@ -48,6 +48,28 @@
 		"login-methods": {
 			"anonymous": "Anonymous",
 			"google": "Google"
+		},
+		"add": {
+			"button": "Add a notification",
+			"title": "Add a new notification",
+			"cancel": "Cancel",
+			"add": "Add",
+			"select-type": "Notification type",
+			"online-all": "All",
+			"types": {
+				"streamer": {
+					"name": "Streamer online",
+					"example": "<selected streamer> is online"
+				},
+				"game": {
+					"name": "Game",
+					"example": "<streamer> plays at <selected game>"
+				},
+				"streamerAndGame": {
+					"name": "Streamer plays at game",
+					"example": "<selected streamer> plays at <selected game>"
+				}
+			}
 		}
 	}
 }
