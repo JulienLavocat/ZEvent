@@ -1,0 +1,81 @@
+{
+	"home": {
+		"stats": {
+			"donations": "Donations totales",
+			"viewersCount": "Spectateurs totaux",
+			"onlineStreams": "Live en cours",
+			"mostWatchedChannel": "Chaîne la plus regardée",
+			"mostWatchedGame": "Jeu le plus regardé"
+		},
+		"updatedAt": "Dernière mise à jour à : {{updatedAt}}"
+	},
+	"navbar": {
+		"items": {
+			"globalStats": "Statistiques globales",
+			"streamers": "Streamers",
+			"games": "Jeux",
+			"events": "Évènements",
+			"notifications": "Notifications",
+			"donation-goals": "Donation goals"
+		}
+	},
+	"donation-goals": {
+		"no-goals": "Pas de donation goals",
+		"simple": "Simple",
+		"recurent": "Récurrent",
+		"equal": "Égal",
+		"achievedAt": "Atteint à : {{achievedAt}}"
+	},
+	"events": {
+		"event": {
+			"details": "Voir les participants"
+		}
+	},
+	"event": {
+		"organizers": "Organisateurs",
+		"participants": "Participants"
+	},
+	"newUser": {
+		"title": "Bienvenue au ZEvent 2022",
+		"body": "This application is an helper aimed to ease the navigation accross all ZEvent's streams. You will be able to see all streams, games, donations goals and statistics of the weekend.",
+		"features": [
+			"qsd",
+			"qwsd"
+		]
+	},
+	"notifications": {
+		"no-permission": "Vous devez autoriser les notifications pour utiliser cette fonctionnalitée",
+		"ask-for-permission": "Demander la permissions",
+		"login-methods": {
+			"anonymous": "Anonyme",
+			"google": "Google"
+		},
+		"types": {
+			"online": "Streamer en ligne",
+			"game": "Jeux"
+		},
+		"all": "tous",
+		"add": {
+			"button": "Ajouter une notification",
+			"title": "Ajouter une nouvelle notification",
+			"cancel": "Annuler",
+			"add": "Ajouter",
+			"select-type": "Type de notification",
+			"online-all": "Tous",
+			"types": {
+				"streamer": {
+					"name": "Streamer en ligne",
+					"example": "<streamer selectionné> est en ligne"
+				},
+				"game": {
+					"name": "Jeux",
+					"example": "<streamer> joue à <jeu séléctionné>",
+					"search": "Chercher un jeu",
+					"all": "tous",
+					"empty-for-all": "Laissez vide pour tout les jeux",
+					"game-selected": "Selectionné : {{game}}"
+				}
+			}
+		}
+	}
+}
