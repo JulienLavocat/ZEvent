@@ -20,7 +20,10 @@
 		}
 	},
 	"donation-goals": {
-		"no-goals": "No donation goals"
+		"no-goals": "No donation goals",
+		"simple": "Simple",
+		"recurent": "Recurent",
+		"achievedAt": "Achieved at {{achievedAt}}"
 	},
 	"events": {
 		"event": {

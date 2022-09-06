@@ -1,5 +1,6 @@
 import React from "react";
 import { RouteObject, useRoutes } from "react-router-dom";
+import DonationGoal from "./components/modules/DonationGoal/DonationGoal";
 import DonationGoals from "./components/modules/DonationGoals/DonationGoals";
 import Event from "./components/modules/Event/Event";
 import Events from "./components/modules/Events/Events";
@@ -68,6 +69,12 @@ const specialCases: PageDetails[] = [
 		name: "",
 		path: "/game",
 		element: <Game />,
+		isVisible: false,
+	},
+	{
+		name: "donation-goal",
+		path: "/donation-goal",
+		element: <DonationGoal />,
 		isVisible: false,
 	},
 ];

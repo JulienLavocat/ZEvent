@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Event } from "../utils/interfaces";
+import { DonationGoal, Event } from "../utils/interfaces";
 
 const DISABLE_NEW_USER = "disable-new-user";
 
 export interface AppState {
 	event: Event | null;
 	game: { name: string; gameId: string } | null;
+	donationGoal: DonationGoal | null;
 	showNewUser: boolean;
 	user: {
 		fcmToken?: string;
@@ -16,6 +17,7 @@ export interface AppState {
 const initialState: AppState = {
 	event: null,
 	game: null,
+	donationGoal: null,
 	showNewUser: !localStorage.getItem(DISABLE_NEW_USER),
 	user: {},
 };
@@ -30,6 +32,12 @@ export const appSlice = createSlice({
 		setGame: (state, action: PayloadAction<AppState["game"]>) => {
 			state.game = action.payload;
 		},
+		setDonationGoal: (
+			state,
+			action: PayloadAction<AppState["donationGoal"]>
+		) => {
+			state.donationGoal = action.payload;
+		},
 		disableNewUser: (state) => {
 			state.showNewUser = false;
 			localStorage.setItem(DISABLE_NEW_USER, "true");
@@ -40,7 +48,12 @@ export const appSlice = createSlice({
 	},
 });
 
-export const { setEvent, setGame, disableNewUser, setFcmToken } =
-	appSlice.actions;
+export const {
+	setEvent,
+	setGame,
+	disableNewUser,
+	setFcmToken,
+	setDonationGoal,
+} = appSlice.actions;
 
 export default appSlice.reducer;

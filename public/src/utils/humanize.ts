@@ -19,11 +19,27 @@ export const humanizeDate = (value: Date) => {
 	}).format(value);
 };
 
+export const humanizeDateTime = (value: Date) => {
+	return new Intl.DateTimeFormat(locale, {
+		weekday: "long",
+		hourCycle: "h23",
+		hour: "2-digit",
+		minute: "2-digit",
+	}).format(value);
+};
+
 export const humanizeHours = (value: Date) => {
 	return new Intl.DateTimeFormat(locale, {
 		// hour12: false,
 		hourCycle: "h23",
 		hour: "2-digit",
 		minute: "numeric",
+	}).format(value);
+};
+
+export const humanizeCurrency = (value: number) => {
+	return new Intl.NumberFormat(locale, {
+		style: "currency",
+		currency: "EUR",
 	}).format(value);
 };
