@@ -50,6 +50,11 @@
 			"anonymous": "Anonymous",
 			"google": "Google"
 		},
+		"types": {
+			"online": "Streamer online",
+			"game": "Game"
+		},
+		"all": "all",
 		"add": {
 			"button": "Add a notification",
 			"title": "Add a new notification",

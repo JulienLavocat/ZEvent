@@ -11,6 +11,7 @@ import { setFcmToken } from "../../../features/appSlice";
 import { auth, firestore, functions, messaging } from "../../../firebase";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import AddNotification from "./AddNotification";
+import NotificationListItem from "./NotificationListItem";
 
 export default function Notifications() {
 	const [hasPermission, setHasPermission] = useState(
@@ -27,13 +28,6 @@ export default function Notifications() {
 	const requestPermission = async () => {
 		const res = await Notification.requestPermission();
 		setHasPermission(res === "granted");
-	};
-
-	const unsubscribeFromTopic = (topic: string) => {
-		return httpsCallable(
-			functions,
-			"unsubscribeFromTopic"
-		)({ token: fcmToken, topic });
 	};
 
 	useEffect(() => {
@@ -76,12 +70,7 @@ export default function Notifications() {
 			</Button>
 			<ul>
 				{userData?.topics?.map((e) => (
-					<li className="flex items-center justify-between" key={e}>
-						<p>{e}</p>
-						<Button onClick={() => unsubscribeFromTopic(e)}>
-							<FaTrash className="text-error" />
-						</Button>
-					</li>
+					<NotificationListItem topic={e} token={fcmToken} />
 				))}
 			</ul>
 			<AddNotification
